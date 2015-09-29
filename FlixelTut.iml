@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="HAXE_MODULE" version="4">
+  <component name="HaxeModuleSettingsStorage">
+    <option name="buildConfig" value="3" />
+    <option name="openFLPath" value="$MODULE_DIR$/Project.xml" />
+    <option name="outputFolder" value="$MODULE_DIR$/out/production/FlixelTut" />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/out/production/FlixelTut" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/assets" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/export" />
+    </content>
+    <orderEntry type="jdk" jdkName="Haxe 3.2.0" jdkType="Haxe toolkit" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="Flixel-Addons" level="application" />
+    <orderEntry type="library" exported="" name="FlixelEngine" level="application" />
+    <orderEntry type="library" exported="" name="lime" level="application" />
+    <orderEntry type="library" exported="" name="Openfl" level="application" />
+    <orderEntry type="module-library">
+      <library name="haxelib|D:/Software/HaxelToolkit/haxe/lib/openfl/3,3,5">
+        <CLASSES>
+          <root url="file://D:/Software/HaxelToolkit/haxe/lib/openfl/3,3,5" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://D:/Software/HaxelToolkit/haxe/lib/openfl/3,3,5" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="haxelib|D:/Software/HaxelToolkit/haxe/lib/flixel/3,3,11">
+        <CLASSES>
+          <root url="file://D:/Software/HaxelToolkit/haxe/lib/flixel/3,3,11" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://D:/Software/HaxelToolkit/haxe/lib/flixel/3,3,11" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="haxelib|D:/Software/HaxelToolkit/haxe/lib/lime/2,6,4">
+        <CLASSES>
+          <root url="file://D:/Software/HaxelToolkit/haxe/lib/lime/2,6,4" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://D:/Software/HaxelToolkit/haxe/lib/lime/2,6,4" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="haxelib|D:/Software/HaxelToolkit/haxe/lib/flixel-addons/1,1,0">
+        <CLASSES>
+          <root url="file://D:/Software/HaxelToolkit/haxe/lib/flixel-addons/1,1,0" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://D:/Software/HaxelToolkit/haxe/lib/flixel-addons/1,1,0" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>
