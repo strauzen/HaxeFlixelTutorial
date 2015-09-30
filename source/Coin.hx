@@ -16,11 +16,14 @@ class Coin extends FlxSprite{
     override public function kill():Void
     {
         alive = false;
+
+        // We call an animation made with Tween then proceed to call a function to end the kill process
         FlxTween.tween(this, { alpha:0, y:y - 16 }, .33, {ease:FlxEase.circOut, complete:finishKill } );
     }
 
     private function finishKill(_):Void
     {
+        // By setting exist to false we make the game stop drawing the coins
         exists = false;
     }
 }

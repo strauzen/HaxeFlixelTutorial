@@ -22,6 +22,7 @@ class PlayState extends FlxState
 	public var level:TiledLevel;
 	public var player:Player;
 	public var coins:FlxTypedGroup<Coin>;
+    public var enemies:FlxTypedGroup<Enemy>;
 
 	/**
 	 * Function that is called up when to state is created to set it up.
@@ -35,6 +36,7 @@ class PlayState extends FlxState
         // Load tilemap and initialize variables
 		level = new TiledLevel("assets/data/room-001.tmx");
 		coins = new FlxTypedGroup();
+        enemies = new FlxTypedGroup();
 
 		// Load the level background and walls
 		add(level.backgroundTiles);
@@ -45,6 +47,7 @@ class PlayState extends FlxState
 
 		// Add the coins to the level
 		add(coins);
+        add(enemies);
 
 		// Add the player to the level
 		add(player);

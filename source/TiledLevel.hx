@@ -74,6 +74,9 @@ class TiledLevel extends TiledMap
             case "coin":
                 // Create a coin and add it to the coin group in the playstate
                 state.coins.add(new Coin(x + 4, y + 4));
+
+            case "enemy":
+                state.enemies.add(new Enemy(x + 4, y, Std.parseInt(object.custom.get("type"))));
         }
     }
 
