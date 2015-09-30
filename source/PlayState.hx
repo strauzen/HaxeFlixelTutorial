@@ -1,5 +1,7 @@
 package;
 
+import flixel.group.FlxTypedGroup;
+import flixel.FlxCamera;
 import flixel.FlxObject;
 import flixel.system.debug.Log;
 import haxe.io.Path;
@@ -19,6 +21,7 @@ class PlayState extends FlxState
 {
 	public var level:TiledLevel;
 	public var player:Player;
+	public var coins:FlxTypedGroup<Coin>;
 
 	/**
 	 * Function that is called up when to state is created to set it up.
@@ -29,16 +32,24 @@ class PlayState extends FlxState
 
 		FlxG.debugger.visible = true;
 
-        // Load tilemap
+        // Load tilemap and initialize variables
 		level = new TiledLevel("assets/data/room-001.tmx");
+		coins = new FlxTypedGroup();
 
+		// Load the level background and walls
 		add(level.backgroundTiles);
         add(level.foregroundTiles);
 
-		// Load player objects
+		// Load player and coin objects
 		level.loadObjects(this);
 
+		// Add the coins to the level
+		add(coins);
 
+		// Add the player to the level
+		add(player);
+
+		FlxG.camera.follow(player, FlxCamera.STYLE_TOPDOWN, 1);
 	}
 
 	/**
@@ -58,6 +69,16 @@ class PlayState extends FlxState
 		super.update();
 
 		level.collideWithLevel(player);
+		FlxG.overlap(player, coins, playerTouchCoin);
+	}
+
+    /**
+	 * Function that determines what happens when a player touches a coin.
+     */
+	private function playerTouchCoin(Player:Player, Coin:Coin):Void
+	{
+		if (Player.alive && Player.exists && Coin.alive && Coin.exists)
+			Coin.kill();
 	}
 
 }

@@ -42,56 +42,6 @@ class TiledLevel extends TiledMap
         loadTileMaps();
     }
 
-    // Loads the different tilemaps using their properties to define what kind of tiles they are
-    private function loadTileMaps()
-    {
-        for (tileLayer in layers)
-        {
-            // We retrieve the tilesheet from the properties of the tilemap
-            var tileSheetName = tileLayer.properties.get("tilesheet");
-
-            if (tileSheetName == null)
-                throw "'tilesheet' property not defined for the '" + tileLayer.name + "' layer. Please add the property
-                        to the layer.";
-
-            // Look for the specified tileset in the list of tilesets of a tilesheet
-            var tileSet:TiledTileSet = null;
-            for (ts in tilesets)
-            {
-                if (ts.name == tileSheetName)
-                {
-                    tileSet = ts;
-                    break;
-                }
-            }
-
-            if (tileSet == null)
-                throw "Tileset '" + tileSheetName + "' not found. Did you mispell the 'tilesheet' property in '" +
-                        tileLayer.name + "' layer?";
-
-            var imagePath = new Path(tileSet.imageSource);
-            var processedPath = c_PATH_LEVEL_TILESHEETS + imagePath.file + "." + imagePath.ext;
-
-            var tilemap:FlxTilemap = new FlxTilemap();
-            tilemap.widthInTiles = width;
-            tilemap.heightInTiles = height;
-            tilemap.loadMap(tileLayer.tileArray, processedPath, tileSet.tileWidth, tileSet.tileHeight, 0, 1, 1, 1);
-
-            if (tileLayer.properties.contains("nocollide"))
-            {
-                backgroundTiles.add(tilemap);
-            }
-            else
-            {
-                if (collidableTileLayers == null)
-                    collidableTileLayers = new Array<FlxTilemap>();
-
-                foregroundTiles.add(tilemap);
-                collidableTileLayers.push(tilemap);
-            }
-        }
-    }
-
     // Load the objects from the tiledMap
     public function loadObjects(state:PlayState)
     {
@@ -120,8 +70,10 @@ class TiledLevel extends TiledMap
                 // Create the player and add it to the PlayState
                 var player:Player = new Player(x, y);
                 state.player = player;
-                state.add(player);
 
+            case "coin":
+                // Create a coin and add it to the coin group in the playstate
+                state.coins.add(new Coin(x + 4, y + 4));
         }
     }
 
@@ -132,11 +84,61 @@ class TiledLevel extends TiledMap
         {
             for (map in collidableTileLayers)
             {
-            // IMPORTANT: Always collide the map with objects, not the other way around.
-            // This prevents odd collision errors (collision separation code off by 1 px).
+                // IMPORTANT: Always collide the map with objects, not the other way around.
+                // This prevents odd collision errors (collision separation code off by 1 px).
                 return FlxG.overlap(map, obj, notifyCallback, processCallback != null ? processCallback : FlxObject.separate);
             }
         }
         return false;
+    }
+
+    // Loads the different tilemaps using their properties to define what kind of tiles they are
+    private function loadTileMaps()
+    {
+        for (tileLayer in layers)
+        {
+            // We retrieve the tilesheet from the properties of the tilemap
+            var tileSheetName = tileLayer.properties.get("tilesheet");
+
+            if (tileSheetName == null)
+                throw "'tilesheet' property not defined for the '" + tileLayer.name + "' layer. Please add the property
+                        to the layer.";
+
+            // Look for the specified tileset in the list of tilesets of a tilesheet
+            var tileSet:TiledTileSet = null;
+            for (ts in tilesets)
+            {
+                if (ts.name == tileSheetName)
+                {
+                    tileSet = ts;
+                    break;
+                }
+            }
+
+            if (tileSet == null)
+                throw "Tileset '" + tileSheetName + "' not found. Did you mispell the 'tilesheet' property in '" +
+                tileLayer.name + "' layer?";
+
+            var imagePath = new Path(tileSet.imageSource);
+            var processedPath = c_PATH_LEVEL_TILESHEETS + imagePath.file + "." + imagePath.ext;
+
+            var tilemap:FlxTilemap = new FlxTilemap();
+            tilemap.widthInTiles = width;
+            tilemap.heightInTiles = height;
+            tilemap.loadMap(tileLayer.tileArray, processedPath, tileSet.tileWidth, tileSet.tileHeight, 0, 1, 1, 1);
+
+            if (tileLayer.properties.contains("nocollide"))
+            {
+                backgroundTiles.add(tilemap);
+            }
+            else
+            {
+                if (collidableTileLayers == null)
+                    collidableTileLayers = new Array<FlxTilemap>();
+
+                foregroundTiles.add(tilemap);
+                collidableTileLayers.push(tilemap);
+            }
+        }
     }
 }
